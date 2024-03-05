@@ -1,0 +1,44 @@
+@startuml diagramap2
+
+class Usuario {
+  +nombre: String
+  +apellido: String
+  +celular: integer
+  +listaLibrosReservados: List<Libro>
+  +dejarResena(libro: Libro, resena: Resena): void
+}
+
+class Libro {
+  +titulo: String
+  +autor: Autor
+  +resenas: List<Resena>
+  +categorias: List<Categoria>
+}
+
+class Resena {
+  +usuario: Usuario
+  +libro: Libro
+  +comentario: String
+}
+
+class Autor {
+  +nombre: String
+  +librosEscritos: List<Libro>
+}
+
+class Categoria {
+  +nombre: String
+  +libros: List<Libro>
+}
+
+Usuario "1" *-- "*" Libro: reserva
+Usuario "1" *-- "*" Resena: deja
+
+Libro "1" *-- "*" Resena: tiene
+Libro "1" -- "1" Autor: pertenece a
+
+Autor "1" *-- "*" Libro: ha escrito
+
+Libro "1" *-- "*" Categoria: clasificado en
+
+@enduml
